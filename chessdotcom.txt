@@ -1,0 +1,40 @@
+We are expected to make chess.com, which lets two live players interact and play chess with each other 
+
+Backend protocol
+This is a real time game, exchange needs to happen between both the browsers simultaneously of client and server
+Server often just needs to send the data to the client and client doesn't need to always ask for it 
+For this reason, don't use http server but use WebSocket server that helps keep the connection more persistent for exchanging 
+msgs to the server
+
+Events that need to be communicated between browser and server;
+1. when user clicks the start button (and make this browser wait for the opponent and wait in queue)
+2. when opponent is found, send the game start event to both the browsers
+This logic is repeated for every user that comes
+We just need a single variable which stores the current user, whenever a new one comes, it empties the variable 
+
+games = [Game1, Game0, Game2]
+List of games is maintained as an in memory variable so that the games of all users are stored 
+
+Game class:
+1. Participant 1
+2. Participant 2
+3. Game state (also verify if this is a valid move)
+4. Events/moves played with time stamps
+5. Game start time
+
+Above info should also be good enough to recreate the board at any point in time, to play back the previous steps when needed 
+To show the moves played in the UI so the user can see the past moves
+As of now these are in memory variables 
+
+Suppose a user played a move then the following steps happen:
+Comp finds the game associated with the user --> comp validates if the move is valid for the game state, checks if there
+is a check or a checkmate and broadcast the event to both the users. If it is not either of these then proceed like below.
+If the move is valid, then it updates the game state and adds the move to the list of events
+Then it sends the move to the opponent
+In this current system design, we can't really recreate the game if the server crashes and the info is lost
+
+Once this basic thing is created then it can be expanded on, with the below mechanisms:
+1. Recovery mechanism
+2. Scaling mechanism
+
+
