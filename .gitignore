@@ -1,5 +1,4 @@
 node_modules/
 backend-primitive/node_modules
-backend-primitive/tsconfig.json
 backend-primitive/package.json
 backend-primitive/package-lock.json
