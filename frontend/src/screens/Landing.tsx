@@ -1,7 +1,11 @@
 
 export const Landing = () => {
-    return <div>
-        Landing page
+    return <div className="mt-2">
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+            <div>
+                <img src={"/chessboard.jpeg"} />
+            </div>
+        </div>
     </div>
 }
 // import React from 'react';
